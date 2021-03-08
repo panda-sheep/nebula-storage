@@ -64,6 +64,7 @@ void RaftexService::initThriftServer(std::shared_ptr<folly::IOThreadPoolExecutor
                                      uint16_t port) {
     LOG(INFO) << "Init thrift server for raft service, port: " << port;
     server_->setPort(port);
+    server_->setReusePort(true);
     server_->setIdleTimeout(std::chrono::seconds(0));
     if (pool != nullptr) {
         server_->setIOThreadPool(pool);
